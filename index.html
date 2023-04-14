@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang ="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        COVID-19 TRACKER
+    </title>
+    <link rel="icon" href="./static/images/bacteria.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/85f6feab6e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./static/css/app.css">
+    <link rel="stylesheet" href="./static/css/grid.css">
+
+    <style>
+        .demTable {
+			height:100%;
+			border:1px solid #ffffff;
+			border-collapse:collapse;
+			padding:20px;
+		}
+		.demTable th {
+			border:1px solid #ffffff;
+			padding:20px;
+			background: #ffffff;
+		}
+		.demTable td {
+			border:1px solid #ffffff;
+			text-align:left;
+			padding:20px;
+			background: #ffffff;
+		}
+
+        table {
+			border:1px solid #b3adad;
+			border-collapse:collapse;
+			padding:25px;
+		}
+		table th {
+			border:1px solid #b3adad;
+			padding:25px;
+			color: #ffffff;
+            background: #1b1b1b;
+		}
+		table td {
+			border:1px solid #b3adad;
+			text-align:left;
+			padding:25px;
+			background: transparent;
+		}
+    </style>
+    
+
+
+</head>
+<body>
+    <!-- TOP NAV -->
+    <div class="nav-wrapper">
+        <div class="container">
+            <div class="nav">
+                <a href="" class="logo col-md-logo ">
+                    C <img src="./static/images/bacteria.png" alt="" width="70" class="logo inline rotate">VID-19 TRACKER
+                </a>
+                <div class="darkmode-switch" id="darkmode-switch">
+                    <span>
+                        <i class ="bx bxs-moon"></i>
+                        <i class ="bx bxs-sun"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END NAV -->
+
+
+    <!-- MAIN -->
+
+    <div class="content">
+        <div class="container">
+            <!-- COUNTRY SELECT START -->
+            <div class="row margin col-md-margin">
+                <div class="col-3 col-ms-6 col-sm12 col-sm-PH">
+                    <div class="col-12">
+                        <h1 class="col-8 col-md-12 col-sm-12 center">PHILIPPINES
+                        <img src="./static/images/flag.svg" width="70" class="inline mb-1" alt=""></h1>
+                        </div>
+        
+                </div>
+            </div>
+            <!-- COUNTRY SELECT END -->
+
+
+            <!-- TRACKING INFORMATION -->
+            <div class="col-12">
+                <h1 class="row margin col-8 col-md-12 col-sm-12 col-md-margin col-sm-today">TODAY <p id="current_date" class="small"></p></h1>
+                
+            </div>
+            <div class="row col-md-row">
+                <div class="col-8 col-md-12 col-sm-12">
+                    <div class="row">
+                    
+                        <!-- COUNTER -->
+                        <div class="col-4a col-sm-12 margin col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">Confirmed Cases</p>
+                                        <h5 class="textinside" id="todayCases"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        
+
+
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 col-md-margin col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count deaths">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm ">Deaths</p>
+                                        <h5 class="textinside text-red-600" id="todayDeaths"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        
+                        
+                        <p class="smallz margin col-md-margin">* Note: 0 value might indicate no reports yet from the Department of Health within this day</p>
+
+                        <!-- ALL TIME CHART -->
+            
+                        <div class="col-12 margin col-md-margin col-sm-today">
+                            <h1 class="row col-8 col-md-12 col-sm-12 paddingz">ALL TIME<p class="small smolll">Since day 1 of recorded date.</p></h1>
+                            
+                        </div>
+                            <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 margin col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">TESTS CONDUCTED</p>
+                                        <h5 class="textinside text-blue-700" id="tests"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">CONFIRMED CASES</p>
+                                        <h5 class="textinside" id="cases"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">ACTIVE CASES</p>
+                                        <h5 class="textinside text-yellow-600" id="active"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 margin col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">RECOVERED</p>
+                                        <h5 class="textinside text-green-700" id="recovered"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">DEATHS</p>
+                                        <h5 class="textinside text-red-600" id="deaths"></h5>
+                                        
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4a col-sm-12 col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">POPULATION</p>
+                                        <h5 class="textinside text-purple-600" id="population"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- SHOW HIDE-->
+                                    
+                            </div>                      
+                         </div>
+
+                          
+                            
+                            
+                            
+                            
+                            
+                            
+                         <div class="row center col-md-row">
+                            <div class="col-3 col-ms-6 col-sm12 ughh">
+                                <div class="boxGLOBAL boxGLOBALmedium">
+                                    <div class="country-select" id="country-select">
+                                        <div class="country-select-toggle" id="country-select-toggle" onclick="myFunctioone()">
+                                            <span>
+                                                Show Chart
+                                            </span>
+                                            <i class="bx bx-chevron-down"></i>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                                <!-- CHART-->
+                                
+                                
+    
+                                <!-- CHART END-->
+                            </div>                                                      
+                        </div>   
+    
+                        <div id="myDIVone" style="display:none">
+                            <div class="col-4 col-sm-12 margin col-md-margin col-sm-chart col-md-chart">
+                                <canvas id="bar-chart" class="chart col-md-chart"></canvas>
+                                </div></div>
+                        
+                        <!-- SHOW HIDE END-->
+                        <!-- ALL TIME CHART END-->
+
+                        <!-- BASIC PROTECTIVE MEASURES -->
+                        
+                        <div class="col-12 margin col-md-margin">
+                            <h1 class="row col-8 col-md-12 col-sm-12 paddingz col-sm-todays">WORLDWIDE</h1>
+                            
+                        </div>
+                            <div class="row">
+                <div class="col-8 col-md-12 col-sm-12">
+                    <div class="row">
+                            <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 margin col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">TESTS CONDUCTED</p>
+                                        <h5 class="textinside text-blue-700" id="alltests"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">CONFIRMED CASES</p>
+                                        <h5 class="textinside" id="allcases"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">ACTIVE CASES</p>
+                                        <h5 class="textinside text-yellow-600" id="allactive"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 margin col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">RECOVERED</p>
+                                        <h5 class="textinside text-green-700" id="allrecovered"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- COUNTER END-->
+                        <!-- COUNTER -->
+                        <div class="col-4 col-sm-12 col-md-margin">
+                            <div class="box box-hover col-md-box col-sm-box">
+                                <div class="count count-confirmed">
+                                    
+                                    </div>
+                                    <div class="count-info">
+                                        <p class="text-sm">DEATHS</p>
+                                        <h5 class="textinside text-red-600" id="alldeaths"></h5>
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- WORLDWIDE END-->
+
+                        
+                       </div>
+                       </div>
+                            
+
+                       <div class="row center col-md-row">
+                        <div class="ughh col-3 col-ms-6 col-sm12">
+                            <div class="boxGLOBAL boxGLOBALmedium">
+                                <div class="country-select" id="country-select">
+                                    <div class="country-select-toggle" id="country-select-toggle" onclick="myFunction()">
+                                        <span>
+                                            Show Chart
+                                        </span>
+                                        <i class="bx bx-chevron-down"></i>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            <!-- CHART-->
+                            
+                            
+
+                            <!-- CHART END-->
+                        </div>                                                      
+                    </div>   
+
+                    <div id="myDIV" style="display:none" class="col-md-myDIV ugh1">
+                        <div class="col-sm-12 margin col-md-margin col-md-myDIV">
+                            <canvas id="bar-chartone" class="boxtry boxsize"></canvas>
+                            </div>
+                        <div class="col-4 col-sm-12 marginz col-md-try "><canvas id="chart2" height="300" width="550"></canvas></div>
+                        <div class="col-4 col-sm-12 center col-md-marginaa col-md-try"><canvas id="deathchart" height="300" width="550"></canvas></div>
+                            </div>
+
+
+
+                        
+                        <!-- COVID-16 HOTLINE -->
+                        <div class="col-12 center col-md-center">
+                            <h1 class="center col-8 col-md-12 col-sm-12 paddings col-md-center">COVID-19 HOTLINES</h1>
+                        </div>
+                        <table class="center hotlines col-md-center">
+                            <thead>
+                                <tr>
+                                    <th>DEPARTMENT</th>
+                                    <th>CONTACT NUMBER</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>&nbsp;RITM LABORATORY CONFIRMATION RESULT</td>
+                                    <td><a href="tel:+639199279180" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">(63) 919 9279180</a></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;EMERGENCY HOTLINE</td>
+                                    <td>&nbsp;<a href="tel:911" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">911</a></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;PRESIDENTIAL COMPLAINT CENTER</td>
+                                    <td><a href="tel:8888" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">8888</a>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;SMART, PLDT, SUN and TNT</td>
+                                    <td>&nbsp;<a href="tel:1555" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">1555</a></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;PHILIPPINE NATIONAL RED CROSS</td>
+                                    <td>&nbsp;<a href="tel:143" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">143</a></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;RED CROSS EMERGENCY RESPONSE UNIT</td>
+                                    <td>&nbsp;<a href="tel:+63287902300" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">(02) 879-02300</a></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;DILG/ DOH</td>
+                                    <td>&nbsp;<a href="tel:+63289426843" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">(02) 894-26843</a></td>
+                                </tr>
+                                <tr>
+                                    <td>RESEARCH INSTITUTE FOR TROPICAL MEDICINE</td>
+                                    <td>&nbsp;<a href="tel:+63288072628" class="text-blue-400 block p-2" style="font-size: 1em; box-sizing: border-box; border: 0px solid rgb(226, 232, 240); color: rgb(99, 179, 237); text-decoration: inherit; padding: 0.5rem; font-family: -apple-system, &quot;system-ui&quot;, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; text-align: center; display: inline !important;">(02) 880-72628</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- COVID-16 HOTLINE END -->
+                    </div>
+                </div>
+            </div>
+            <!-- END TRACKING INFORMATION -->
+
+        </div>
+    </div>
+
+
+    <!-- END MAIN -->
+    <!-- FOOTER -->
+    <div class="footer">
+        © <a href="https://danielledavid.github.io" class="text-blue-500">Danielle David</a>. All rights reserved.
+        <div class="smaller">API by <a href="https://github.com/novelcovid/api" class="text-blue-500">Novel Covid</a></div>
+    </div>
+    
+    
+    <!-- END FOOTER -->
+
+
+
+    <!-- LOADER -->
+    <div class="loader">
+        <i class="bx bxs-virus bx-spin"></i>
+    </div>
+
+    <!-- LOADER END -->
+
+
+
+   
+    <!-- APEX CHART -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <!-- JS -->
+    <script src="./static/js/app.js"></script>
+    <script src="./static/js/ph.js"></script>
+    <script src="./static/src/api.js"></script>
+    <script src="./static/src/chart2.js"></script>
+    <script src="./static/src/deathchart.js"></script>
+    <script src="./static/src/worldapi.js"></script>
+
+
+
+</body>
+</html>
